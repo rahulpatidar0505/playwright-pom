@@ -1,26 +1,46 @@
-post {
-    always {
+node {
 
-        // ✅ Publish Playwright HTML report
-        publishHTML([
-            allowMissing: false,
-            alwaysLinkToLastBuild: true,
-            keepAll: true,
-            reportDir: 'reports/playwright-report',
-            reportFiles: 'index.html',
-            reportName: 'Playwright HTML Report',
-            useWrapperFileDirectly: true
-        ])
+    try {
 
-        // ✅ Send Teams notification
-        script {
-            def status = currentBuild.currentResult
+        stage('Checkout Code') {
+            git branch: 'main',
+                url: 'https://github.com/rahulpatidar0505/playwright-pom.git'
+        }
+
+        stage('Install Dependencies') {
+            bat 'npm install'
+            bat 'npx playwright install'
+        }
+
+        stage('Run Playwright Tests') {
+            bat 'npx playwright test'
+        }
+
+    } catch (e) {
+        currentBuild.result = 'FAILURE'
+        throw e
+
+    } finally {
+
+        stage('Publish Report') {
+            publishHTML([
+                allowMissing: false,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'reports/playwright-report',
+                reportFiles: 'index.html',
+                reportName: 'Playwright HTML Report',
+                useWrapperFileDirectly: true
+            ])
+        }
+
+        stage('Notify Teams') {
+            def status = currentBuild.result ?: 'SUCCESS'
             def reportUrl = "${env.BUILD_URL}Playwright_20HTML_20Report/"
 
             def payload = """
             {
-              "text": "🧪 *Playwright Test Execution*\\n
-                       🔁 Status: *${status}*\\n
+              "text": "🧪 Playwright Tests: ${status}\\n
                        📦 Job: ${env.JOB_NAME}\\n
                        🔢 Build: #${env.BUILD_NUMBER}\\n
                        📊 Report: ${reportUrl}"
