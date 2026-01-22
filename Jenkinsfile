@@ -35,24 +35,16 @@ node {
         }
 
         stage('Notify Teams') {
-            def status = currentBuild.result ?: 'SUCCESS'
-            def reportUrl = "${env.BUILD_URL}Playwright_20HTML_20Report/"
+    def status = currentBuild.result ?: 'SUCCESS'
+    def reportUrl = "${env.BUILD_URL}Playwright_20HTML_20Report/"
 
-            def payload = """
-            {
-              "text": "🧪 Playwright Tests: ${status}\\n
-                       📦 Job: ${env.JOB_NAME}\\n
-                       🔢 Build: #${env.BUILD_NUMBER}\\n
-                       📊 Report: ${reportUrl}"
-            }
-            """
+    bat """
+    curl -X POST ^
+      -H "Content-Type: application/json" ^
+      -d "{\\"text\\":\\"Playwright Tests: ${status} | Job: ${env.JOB_NAME} | Build: #${env.BUILD_NUMBER} | Report: ${reportUrl}\\"}" ^
+      "https://defaultb87eec8cf4bd4a55b25e9251c87712.28.environment.api.powerplatform.com/powerautomate/automations/direct/workflows/d3fb49b546434f00b04d70cc75195f6d/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=m6UC8JRtJpDDZ3PcIp60N_tJOdEsrlYAPZBkbnTTLu8"
+    """
+}
 
-            bat """
-            curl -X POST ^
-                 -H "Content-Type: application/json" ^
-                 -d "${payload}" ^
-                 "https://defaultb87eec8cf4bd4a55b25e9251c87712.28.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/d3fb49b546434f00b04d70cc75195f6d/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=m6UC8JRtJpDDZ3PcIp60N_tJOdEsrlYAPZBkbnTTLu8"
-            """
-        }
     }
 }
