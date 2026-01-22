@@ -1,9 +1,8 @@
-const { test, expect } = require('@playwright/test');
-const { faker } = require('@faker-js/faker');
-const { DateTime } = require('luxon');
-const env = require('../../src/config').default;
-
-const bookingDetails = require('../../testData/booking-details.json');
+import { test, expect } from '@playwright/test';
+import { faker } from '@faker-js/faker';
+import { DateTime } from 'luxon';
+import env from '../../src/config/index.js';
+import bookingDetails from '../../testData/booking-details.json' with { type: 'json' };
 
 let token;
 
@@ -94,7 +93,6 @@ test('should be able to create a booking with faker data', async ({
       additionalneeds: 'Breakfast',
     },
   });
-  console.log(await response.json());
   expect(response.ok()).toBeTruthy();
   expect(response.status()).toBe(200);
   const responseBody = await response.json();

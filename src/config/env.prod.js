@@ -1,5 +1,5 @@
-module.exports = {
-  baseUrl: 'https://prod.example.com/practice-app',
+export default {
+  baseUrl: 'https://prod.zenetratechnologies.com/practice-app',
   apiBaseUrl: 'https://restful-booker.herokuapp.com',
   credentials: {
     username: 'admin',

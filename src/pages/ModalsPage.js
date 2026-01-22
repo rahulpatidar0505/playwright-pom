@@ -116,4 +116,4 @@ class ModalsPage {
   }
 }
 
-module.exports = { ModalsPage };
+export { ModalsPage };

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-const { AutoWaitingPage } = require('../../src/pages/AutoWaitingPage');
-const { NavigationPage } = require('../../src/pages/NavigationPage');
-const env = require('../../src/config').default;
+import { AutoWaitingPage } from '../../src/pages/AutoWaitingPage.js';
+import { NavigationPage } from '../../src/pages/NavigationPage.js';
+import env from '../../src/config/index.js';
 
 test('test', async ({ page }) => {
   await page.goto(env.baseUrl);

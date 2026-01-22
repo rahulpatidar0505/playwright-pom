@@ -2,7 +2,6 @@ class UIElementsPage {
   constructor(page) {
     this.page = page;
 
-    // Drag and Drop locators
     this.draggable1 = '[data-testid="draggable-1"]';
     this.draggable2 = '[data-testid="draggable-2"]';
     this.dropZone = '[data-testid="dropZone"]';
@@ -21,4 +20,4 @@ class UIElementsPage {
   }
 }
 
-module.exports = { UIElementsPage };
+export { UIElementsPage };

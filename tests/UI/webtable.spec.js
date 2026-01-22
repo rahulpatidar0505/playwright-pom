@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-const { SmartTablePage } = require('../../src/pages/SmartTablePage');
-const { NavigationPage } = require('../../src/pages/NavigationPage');
-const env = require('../../src/config').default;
+import { SmartTablePage } from '../../src/pages/SmartTablePage.js';
+import { NavigationPage } from '../../src/pages/NavigationPage.js';
+import env from '../../src/config/index.js';
 
 test.beforeEach('Navigate to Smart Table', async ({ page }) => {
   await page.goto(env.baseUrl);

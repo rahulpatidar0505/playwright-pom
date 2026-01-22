@@ -2,7 +2,6 @@ class AutoWaitingPage {
   constructor(page) {
     this.page = page;
 
-    // Locators
     this.slowLoadingButton = '[data-testid="slow-loading-button"]';
     this.animationButton = '[data-testid="animation-button"]';
     this.processCompletedText = page.getByText('✅ Process completed!');
@@ -21,4 +20,4 @@ class AutoWaitingPage {
   }
 }
 
-module.exports = { AutoWaitingPage };
+export { AutoWaitingPage };

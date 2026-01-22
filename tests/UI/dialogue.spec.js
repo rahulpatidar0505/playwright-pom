@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-const { ModalsPage } = require('../../src/pages/ModalsPage');
-const { NavigationPage } = require('../../src/pages/NavigationPage');
-const env = require('../../src/config').default;
+import { ModalsPage } from '../../src/pages/ModalsPage.js';
+import { NavigationPage } from '../../src/pages/NavigationPage.js';
+import env from '../../src/config/index.js';
 
 test.beforeEach('Navigate and verify the title', async ({ page }) => {
   await page.goto(env.baseUrl);

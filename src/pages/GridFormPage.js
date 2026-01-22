@@ -2,7 +2,6 @@ class GridFormPage {
   constructor(page) {
     this.page = page;
 
-    // Locators
     this.firstNameInput = page.getByPlaceholder('First Name');
     this.lastNameInput = page.getByPlaceholder('Last Name');
     this.emailInput = page.getByPlaceholder('Email');
@@ -29,4 +28,4 @@ class GridFormPage {
   }
 }
 
-module.exports = { GridFormPage };
+export { GridFormPage };

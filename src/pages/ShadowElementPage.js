@@ -2,7 +2,6 @@ class ShadowElementPage {
   constructor(page) {
     this.page = page;
 
-    // Locators
     this.shadowButton = '[data-testid="shadow-button"]';
     this.successMessage = page.getByText('Button clicked successfully!');
   }
@@ -12,4 +11,4 @@ class ShadowElementPage {
   }
 }
 
-module.exports = { ShadowElementPage };
+export { ShadowElementPage };

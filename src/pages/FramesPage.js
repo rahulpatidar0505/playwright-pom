@@ -2,7 +2,6 @@ class FramesPage {
   constructor(page) {
     this.page = page;
 
-    // Main page locators
     this.loadFrameButton = '[data-testid="load-practice-frame"]';
     this.iframe = '[data-testid="practice-iframe"]';
   }
@@ -34,4 +33,4 @@ class FramesPage {
   }
 }
 
-module.exports = { FramesPage };
+export { FramesPage };

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-const { UIElementsPage } = require('../../src/pages/UIElementsPage');
-const { NavigationPage } = require('../../src/pages/NavigationPage');
-const env = require('../../src/config').default;
+import { UIElementsPage } from '../../src/pages/UIElementsPage.js';
+import { NavigationPage } from '../../src/pages/NavigationPage.js';
+import env from '../../src/config/index.js';
 
 test('Drag and Drop test', async ({ page }) => {
   await page.goto(env.baseUrl);

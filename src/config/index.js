@@ -1,9 +1,11 @@
+import envQa from './env.qa.js';
+import envProd from './env.prod.js';
+
 const ENV = process.env.ENV || 'qa';
 
 const configs = {
-  qa: require('./env.qa'),
-  stage: require('./env.stage'),
-  prod: require('./env.prod'),
+  qa: envQa,
+  prod: envProd,
 };
 
 export default configs[ENV];

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-const { LoginPage } = require('../../src/pages/LoginPage');
-const { NavigationPage } = require('../../src/pages/NavigationPage');
-const env = require('../../src/config').default;
+import { LoginPage } from '../../src/pages/LoginPage.js';
+import { NavigationPage } from '../../src/pages/NavigationPage.js';
+import env from '../../src/config/index.js';
 
 test.describe('Authentication Tests', () => {
   test('Handle Authentication - Save State', async ({ page }) => {

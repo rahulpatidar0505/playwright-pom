@@ -2,7 +2,7 @@
   "cookies": [],
   "origins": [
     {
-      "origin": "http://localhost:4200",
+      "origin": "https://zenetratechnologies.com",
       "localStorage": [
         {
           "name": "cookie_consent",
@@ -10,11 +10,11 @@
         },
         {
           "name": "authSession",
-          "value": "{\"id\":\"admin\",\"username\":\"admin\",\"role\":\"admin\",\"name\":\"Admin User\",\"permissions\":[\"read\",\"write\",\"delete\",\"manage-users\"],\"loginTime\":\"2026-01-21T06:12:28.327Z\",\"expiresAt\":\"2026-01-22T06:12:28.327Z\"}"
+          "value": "{\"id\":\"admin\",\"username\":\"admin\",\"role\":\"admin\",\"name\":\"Admin User\",\"permissions\":[\"read\",\"write\",\"delete\",\"manage-users\"],\"loginTime\":\"2026-01-22T11:54:17.892Z\",\"expiresAt\":\"2026-01-23T11:54:17.905Z\"}"
         },
         {
           "name": "userPreferences",
-          "value": "{\"theme\":\"default\",\"language\":\"en\",\"timezone\":\"Asia/Calcutta\",\"lastLogin\":\"2026-01-21T06:12:28.379Z\"}"
+          "value": "{\"theme\":\"default\",\"language\":\"en\",\"timezone\":\"Asia/Calcutta\",\"lastLogin\":\"2026-01-22T11:54:17.926Z\"}"
         }
       ]
     }

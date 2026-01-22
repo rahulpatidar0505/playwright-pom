@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-const { GridFormPage } = require('../../src/pages/GridFormPage');
-const { NavigationPage } = require('../../src/pages/NavigationPage');
-const env = require('../../src/config').default;
+import { GridFormPage } from '../../src/pages/GridFormPage.js';
+import { NavigationPage } from '../../src/pages/NavigationPage.js';
+import env from '../../src/config/index.js';
 
 test.beforeEach('Navigate and verify the title', async ({ page }) => {
   await page.goto(env.baseUrl);

@@ -1,9 +1,13 @@
-const { defineConfig, devices } = require('@playwright/test');
-const env = require('./src/config').default;
+import { defineConfig, devices } from '@playwright/test';
+import env from './src/config/index.js';
 
-module.exports = defineConfig({
+export default defineConfig({
   testDir: './tests',
   fullyParallel: false,
+  timeout: 30000,
+  expect: {
+    timeout: 5000,
+  },
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : 1,
   outputDir: 'reports/test-results',
@@ -13,11 +17,13 @@ module.exports = defineConfig({
   ],
   use: {
     baseURL: env.baseUrl,
-    trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
+    trace: 'off',
+    screenshot: 'off',
     video: 'off',
     viewport: null,
     ignoreHTTPSErrors: true,
+    actionTimeout: 10000,
+    navigationTimeout: 30000,
     launchOptions: {
       args: ['--start-maximized'],
     },

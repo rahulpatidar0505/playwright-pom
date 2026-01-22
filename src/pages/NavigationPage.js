@@ -2,7 +2,6 @@ class NavigationPage {
   constructor(page) {
     this.page = page;
 
-    // Cookie consent
     this.acceptAllButton = page.getByRole('button', { name: 'Accept All' });
 
     // Navigation menu items
@@ -54,4 +53,4 @@ class NavigationPage {
   }
 }
 
-module.exports = { NavigationPage };
+export { NavigationPage };

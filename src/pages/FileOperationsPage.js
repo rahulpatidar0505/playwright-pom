@@ -49,4 +49,4 @@ class FileOperationsPage {
   }
 }
 
-module.exports = { FileOperationsPage };
+export { FileOperationsPage };

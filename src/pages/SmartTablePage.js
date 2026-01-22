@@ -2,7 +2,6 @@ class SmartTablePage {
   constructor(page) {
     this.page = page;
 
-    // Locators
     this.table = '[data-testid="smartTable"]';
     this.addRowButton = '[data-testid="addRowBtn"]';
     this.addRowFormLocator = page.locator('[data-testid="addRowForm"]');
@@ -69,4 +68,4 @@ class SmartTablePage {
   }
 }
 
-module.exports = { SmartTablePage };
+export { SmartTablePage };

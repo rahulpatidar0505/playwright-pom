@@ -1,8 +1,6 @@
-const playwright = require('@playwright/test');
-const base = playwright.test;
-const expect = playwright.expect;
-const { NavigationPage } = require('../pages/NavigationPage');
-const env = require('../config').default;
+import { test as base, expect } from '@playwright/test';
+import { NavigationPage } from '../pages/NavigationPage.js';
+import env from '../config/index.js';
 
 /**
  * Custom test fixture that extends Playwright's base test
@@ -10,9 +8,9 @@ const env = require('../config').default;
  * - Navigation to baseUrl
  * - Cookie consent acceptance
  * - Provides NavigationPage instance for further navigation
- * 
+ *
  * Usage in spec files:
- * - Import: const { test, expect } = require('../../src/fixtures/baseFixture');
+ * - Import: import { test, expect } from '../../src/fixtures/baseFixture.js';
  * - Use basePage fixture: test('my test', async ({ basePage }) => { ... })
  * - Access page: basePage.page
  * - Access navigationPage: basePage.navigationPage
@@ -28,4 +26,4 @@ const test = base.extend({
   },
 });
 
-module.exports = { test, expect };
+export { test, expect };

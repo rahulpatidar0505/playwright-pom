@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-const { FramesPage } = require('../../src/pages/FramesPage');
-const { NavigationPage } = require('../../src/pages/NavigationPage');
-const env = require('../../src/config').default;
+import { FramesPage } from '../../src/pages/FramesPage.js';
+import { NavigationPage } from '../../src/pages/NavigationPage.js';
+import env from '../../src/config/index.js';
 
 test('Handle Frames', async ({ page }) => {
   await page.goto(env.baseUrl);
