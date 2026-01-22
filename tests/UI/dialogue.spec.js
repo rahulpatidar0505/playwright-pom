@@ -10,7 +10,7 @@ test.beforeEach('Navigate and verify the title', async ({ page }) => {
   await navigationPage.goToModals();
 });
 
-test('Handle Dialogue', async ({ page }) => {
+test.only('Handle Dialogue', async ({ page }) => {
   const modalsPage = new ModalsPage(page);
   await modalsPage.openDialog();
   await modalsPage.confirmDialog();
@@ -102,7 +102,7 @@ test('Handle New Window', async ({ page, context }) => {
   expect(await newPage.title()).toBeTruthy();
 });
 
-test.only('Open External Site', async ({ page, context }) => {
+test('Open External Site', async ({ page, context }) => {
   const modalsPage = new ModalsPage(page);
   const [newPage] = await Promise.all([
     context.waitForEvent('page'),
