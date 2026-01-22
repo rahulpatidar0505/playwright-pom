@@ -5,7 +5,6 @@ import env from '../../src/config/index.js';
 
 test.beforeEach('Navigate to file operations page', async ({ page }) => {
   await page.goto(env.baseUrl);
-
   const navigationPage = new NavigationPage(page);
   await navigationPage.acceptCookies();
   await navigationPage.goToFileOperations();

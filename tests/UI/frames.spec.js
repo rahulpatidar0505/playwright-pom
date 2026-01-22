@@ -3,19 +3,17 @@ import { FramesPage } from '../../src/pages/FramesPage.js';
 import { NavigationPage } from '../../src/pages/NavigationPage.js';
 import env from '../../src/config/index.js';
 
-test('Handle Frames', async ({ page }) => {
+test.beforeEach(async ({ page }) => {
   await page.goto(env.baseUrl);
-
   const navigationPage = new NavigationPage(page);
   await navigationPage.acceptCookies();
   await navigationPage.goToFrames();
+});
 
+test('Handle Frames', async ({ page }) => {
   const framesPage = new FramesPage(page);
-
   await framesPage.loadFrame();
-
   const frame = framesPage.getFrame();
-
   await framesPage.fillFrameForm(frame, {
     name: 'pallavi',
     email: 'deore@jhfs',

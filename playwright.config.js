@@ -5,6 +5,7 @@ export default defineConfig({
   testDir: './tests',
   fullyParallel: false,
   timeout: 30000,
+  globalSetup: './src/config/global-setup.js',
   expect: {
     timeout: 5000,
   },

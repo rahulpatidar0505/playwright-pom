@@ -3,15 +3,15 @@ import { UIElementsPage } from '../../src/pages/UIElementsPage.js';
 import { NavigationPage } from '../../src/pages/NavigationPage.js';
 import env from '../../src/config/index.js';
 
-test('Drag and Drop test', async ({ page }) => {
+test.beforeEach(async ({ page }) => {
   await page.goto(env.baseUrl);
-
   const navigationPage = new NavigationPage(page);
   await navigationPage.acceptCookies();
   await navigationPage.goToUIElements();
+});
 
+test('Drag and Drop test', async ({ page }) => {
   const uiElementsPage = new UIElementsPage(page);
-
   await expect(uiElementsPage.dropZoneText).toBeVisible();
 
   await uiElementsPage.dragItemToZone(uiElementsPage.draggable1);

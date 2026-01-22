@@ -5,7 +5,6 @@ import env from '../../src/config/index.js';
 
 test.beforeEach('Navigate to Smart Table', async ({ page }) => {
   await page.goto(env.baseUrl);
-
   const navigationPage = new NavigationPage(page);
   await navigationPage.acceptCookies();
   await navigationPage.goToSmartTable();
