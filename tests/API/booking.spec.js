@@ -100,3 +100,96 @@ test('should be able to create a booking with faker data', async ({
   expect(responseBody.booking).toHaveProperty('firstname', randomFirstName);
   expect(responseBody.booking).toHaveProperty('lastname', randomLastName);
 });
+
+test.describe.serial('CRUD operations on a booking', () => {
+  let bookingId;
+
+  test('CREATE - should be able to create a new booking', async ({
+    request,
+  }) => {
+    const createResponse = await request.post(`${env.apiBaseUrl}/booking`, {
+      data: {
+        firstname: 'John',
+        lastname: 'Doe',
+        totalprice: 500,
+        depositpaid: true,
+        bookingdates: {
+          checkin: '2024-01-01',
+          checkout: '2024-01-10',
+        },
+        additionalneeds: 'Lunch',
+      },
+    });
+    expect(createResponse.ok()).toBeTruthy();
+    expect(createResponse.status()).toBe(200);
+    const createBody = await createResponse.json();
+    bookingId = createBody.bookingid;
+    expect(bookingId).toBeDefined();
+    console.log(`Created booking with ID: ${bookingId}`);
+  });
+
+  test('READ - should be able to get the created booking', async ({
+    request,
+  }) => {
+    const getResponse = await request.get(`${env.apiBaseUrl}/booking/${bookingId}`);
+    expect(getResponse.ok()).toBeTruthy();
+    expect(getResponse.status()).toBe(200);
+    const getBody = await getResponse.json();
+    expect(getBody).toHaveProperty('firstname', 'John');
+    expect(getBody).toHaveProperty('lastname', 'Doe');
+  });
+
+  test('UPDATE - should be able to update the booking', async ({ request }) => {
+    const updateResponse = await request.put(
+      `${env.apiBaseUrl}/booking/${bookingId}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Cookie: `token=${token}`,
+        },
+        data: {
+          firstname: 'Rahul',
+          lastname: 'Jones',
+          totalprice: 691,
+          depositpaid: false,
+          bookingdates: {
+            checkin: '2020-11-15',
+            checkout: '2025-01-18',
+          },
+          additionalneeds: 'Breakfast',
+        },
+      }
+    );
+    expect(updateResponse.ok()).toBeTruthy();
+    expect(updateResponse.status()).toBe(200);
+    const updateBody = await updateResponse.json();
+    expect(updateBody).toHaveProperty('firstname', 'Rahul');
+    expect(updateBody).toHaveProperty('lastname', 'Jones');
+    expect(updateBody).toHaveProperty('totalprice', 691);
+    expect(updateBody).toHaveProperty('depositpaid', false);
+    expect(updateBody.bookingdates).toHaveProperty('checkin', '2020-11-15');
+    expect(updateBody.bookingdates).toHaveProperty('checkout', '2025-01-18');
+    expect(updateBody).toHaveProperty('additionalneeds', 'Breakfast');
+  });
+
+  test('DELETE - should be able to delete the booking', async ({ request }) => {
+    const deleteResponse = await request.delete(
+      `${env.apiBaseUrl}/booking/${bookingId}`,
+      {
+        headers: {
+          Cookie: `token=${token}`,
+        },
+      }
+    );
+    expect(deleteResponse.status()).toBe(201);
+  });
+
+  test('VERIFY DELETE - should confirm booking is deleted', async ({
+    request,
+  }) => {
+    const verifyResponse = await request.get(
+      `${env.apiBaseUrl}/booking/${bookingId}`
+    );
+    expect(verifyResponse.status()).toBe(404);
+  });
+});
