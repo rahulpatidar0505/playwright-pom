@@ -13,6 +13,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : 1,
   outputDir: 'reports/test-results',
   reporter: [
+    ['list'],
     ['html', { open: 'never', outputFolder: 'reports/playwright-report' }],
     ['allure-playwright', { resultsDir: 'reports/allure-results' }],
   ],

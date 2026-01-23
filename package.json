@@ -2,34 +2,32 @@
   "name": "playwrightpom",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test --headed",
+    "test:headless": "npx playwright test",
     "test:qa": "set ENV=qa&& npx playwright test --headed",
     "test:prod": "set ENV=prod&& npx playwright test --headed",
-    "test:headless": "npx playwright test",
+    "test:repeat": "npx playwright test --repeat-each=10",
     "html:report": "npx playwright show-report reports/playwright-report",
     "record": "npx playwright codegen",
     "allure:clean": "if exist reports\\allure-results rmdir /s /q reports\\allure-results && if exist reports\\allure-report rmdir /s /q reports\\allure-report",
     "allure:report": "npx allure generate reports/allure-results -o reports/allure-report --clean && npx allure open reports/allure-report",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{js,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,json,md}\"",
     "format:files": "prettier --write"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rahulpatidar0505/playwright-pom.git"
+    "url": "https://github.com/rahulpatidar0505/playwright-pom.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rahulpatidar0505/playwright-pom/issues"
-  },
-  "homepage": "https://github.com/rahulpatidar0505/playwright-pom#readme",
   "devDependencies": {
     "@playwright/test": "^1.57.0",
-    "@types/node": "^25.0.9"
+    "@types/node": "^25.0.9",
+    "eslint": "^9.39.2",
+    "eslint-plugin-playwright": "^2.5.0"
   },
   "dependencies": {
     "@faker-js/faker": "^10.2.0",

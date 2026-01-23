@@ -15,13 +15,13 @@ test.describe('File Operations Tests', () => {
     const fileOperationsPage = new FileOperationsPage(page);
 
     // Single file upload
-    await fileOperationsPage.uploadSingleFile('testData/sample-notes.txt');
+    await fileOperationsPage.uploadSingleFile('src/testData/sample-notes.txt');
     await expect(fileOperationsPage.removeSingleFileButton).toBeVisible();
 
     // Multiple files upload
     await fileOperationsPage.uploadMultipleFiles([
-      'testData/sample-notes.txt',
-      'testData/sample-notes-2.txt',
+      'src/testData/sample-notes.txt',
+      'src/testData/sample-notes-2.txt',
     ]);
     await expect(fileOperationsPage.removeMultipleFile0Button).toBeVisible();
     await expect(fileOperationsPage.removeMultipleFile1Button).toBeVisible();

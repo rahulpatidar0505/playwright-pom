@@ -2,9 +2,10 @@ import { test, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 import { DateTime } from 'luxon';
 import env from '../../src/config/index.js';
-import bookingDetails from '../../testData/booking-details.json' with { type: 'json' };
+import bookingDetails from '../../src/testData/booking-details.json' with { type: 'json' };
 
-let token;
+// eslint-disable-next-line no-unused-vars
+let token = '';
 
 test.beforeEach('Create authentication token', async ({ request }) => {
   const response = await request.post(`${env.apiBaseUrl}/auth`, {

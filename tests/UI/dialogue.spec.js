@@ -10,7 +10,7 @@ test.beforeEach('Navigate and verify the title', async ({ page }) => {
   await navigationPage.goToModals();
 });
 
-test.only('Handle Dialogue', async ({ page }) => {
+test('Handle Dialogue', async ({ page }) => {
   const modalsPage = new ModalsPage(page);
   await modalsPage.openDialog();
   await modalsPage.confirmDialog();
@@ -55,6 +55,7 @@ test('Handle Tooltip', async ({ page }) => {
 test('Simple Alert', async ({ page }) => {
   const modalsPage = new ModalsPage(page);
   page.on('dialog', async dialog => {
+    // eslint-disable-next-line no-console
     console.log(dialog.message());
     await dialog.accept();
   });
@@ -65,6 +66,7 @@ test('Simple Alert', async ({ page }) => {
 test('Confirm Alert', async ({ page }) => {
   const modalsPage = new ModalsPage(page);
   page.on('dialog', async dialog => {
+    // eslint-disable-next-line no-console
     console.log(dialog.message());
     await dialog.accept();
   });
@@ -75,6 +77,7 @@ test('Confirm Alert', async ({ page }) => {
 test('Prompt Dialog', async ({ page }) => {
   const modalsPage = new ModalsPage(page);
   page.once('dialog', async dialog => {
+    // eslint-disable-next-line no-console
     console.log(dialog.message());
     await dialog.accept('Hello Playwright');
   });

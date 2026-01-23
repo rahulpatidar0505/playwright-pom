@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { chromium } from '@playwright/test';
 import { NavigationPage } from '../pages/NavigationPage.js';
 import { LoginPage } from '../pages/LoginPage.js';
