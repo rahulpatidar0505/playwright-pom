@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { faker } from '@faker-js/faker';
 import { GridFormPage } from '../../src/pages/GridFormPage.js';
 import { NavigationPage } from '../../src/pages/NavigationPage.js';
 import env from '../../src/config/index.js';
@@ -18,13 +19,13 @@ test.describe('Form Grid Tests', () => {
     const gridFormPage = new GridFormPage(page);
 
     await gridFormPage.fillForm({
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john.doe@example.com',
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      email: faker.internet.email(),
       country: 'India',
-      city: 'Tokyo',
-      jobRole: 'QA',
-      experience: '10+ years',
+      city: 'Mumbai',
+      jobRole: faker.helpers.arrayElement(['QA', 'Developer', 'Designer', 'Manager']),
+      experience: faker.helpers.arrayElement(['0-1 years', '2-5 years', '6-10 years', '10+ years']),
     });
 
     await gridFormPage.submitForm();

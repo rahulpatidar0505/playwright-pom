@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { faker } from '@faker-js/faker';
 import { FramesPage } from '../../src/pages/FramesPage.js';
 import { NavigationPage } from '../../src/pages/NavigationPage.js';
 import env from '../../src/config/index.js';
@@ -15,12 +16,12 @@ test('Handle Frames', async ({ page }) => {
   await framesPage.loadFrame();
   const frame = framesPage.getFrame();
   await framesPage.fillFrameForm(frame, {
-    name: 'pallavi',
-    email: 'deore@jhfs',
-    phone: '9874965',
-    country: 'au',
-    level: 'Intermediate',
-    message: "jhljkjerytly.t';ur/",
+    name: faker.person.fullName(),
+    email: faker.internet.email(),
+    phone: faker.phone.number(),
+    country: 'India',
+    level: faker.helpers.arrayElement(['Beginner', 'Intermediate', 'Advanced']),
+    message: faker.lorem.sentence(),
   });
 
   await framesPage.submitFrameForm(frame);
