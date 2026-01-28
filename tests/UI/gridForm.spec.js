@@ -24,8 +24,18 @@ test.describe('Form Grid Tests', () => {
       email: faker.internet.email(),
       country: 'India',
       city: 'Mumbai',
-      jobRole: faker.helpers.arrayElement(['QA', 'Developer', 'Designer', 'Manager']),
-      experience: faker.helpers.arrayElement(['0-1 years', '2-5 years', '6-10 years', '10+ years']),
+      jobRole: faker.helpers.arrayElement([
+        'QA',
+        'Developer',
+        'Designer',
+        'Manager',
+      ]),
+      experience: faker.helpers.arrayElement([
+        '0-1 years',
+        '2-5 years',
+        '6-10 years',
+        '10+ years',
+      ]),
     });
 
     await gridFormPage.submitForm();

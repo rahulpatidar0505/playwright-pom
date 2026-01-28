@@ -76,9 +76,16 @@ npm test
 # Run tests in headless mode (faster, no UI)
 npm run test:headless
 
+# Run only UI tests
+npm run test:ui
+
+# Run only API tests
+npm run test:api
+
 # Run tests multiple times (stress testing)
 npm run test:repeat
 ```
+
 </details>
 
 <details>
@@ -91,6 +98,7 @@ npm run test:qa
 # Run tests against Production environment
 npm run test:prod
 ```
+
 </details>
 
 <details>
@@ -100,6 +108,7 @@ npm run test:prod
 # Launch Playwright codegen to record tests
 npm run record
 ```
+
 </details>
 
 ---
@@ -121,10 +130,10 @@ npm run allure:clean
 
 ### Report Types
 
-| Report Type | Command | Description |
-|-------------|---------|-------------|
-| 🎭 Playwright | `npm run html:report` | Interactive HTML report with screenshots & videos |
-| 📈 Allure | `npm run allure:report` | Beautiful test analytics and trends |
+| Report Type   | Command                 | Description                                       |
+| ------------- | ----------------------- | ------------------------------------------------- |
+| 🎭 Playwright | `npm run html:report`   | Interactive HTML report with screenshots & videos |
+| 📈 Allure     | `npm run allure:report` | Beautiful test analytics and trends               |
 
 ---
 
@@ -157,14 +166,14 @@ npm run update:deps
 
 ## 🏗️ Built With
 
-| Technology | Purpose |
-|------------|---------|
-| ![Playwright](https://img.shields.io/badge/Playwright-45ba4b?logo=playwright&logoColor=white) | Test automation |
-| ![Allure](https://img.shields.io/badge/Allure-FF6347?logo=qameta&logoColor=white) | Test reporting |
-| ![Faker.js](https://img.shields.io/badge/Faker.js-FFC107?logo=javascript&logoColor=black) | Test data generation |
-| ![Luxon](https://img.shields.io/badge/Luxon-4B0082?logo=javascript&logoColor=white) | Date/time handling |
-| ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?logo=prettier&logoColor=black) | Code formatting |
-| ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=white) | Code linting |
+| Technology                                                                                    | Purpose              |
+| --------------------------------------------------------------------------------------------- | -------------------- |
+| ![Playwright](https://img.shields.io/badge/Playwright-45ba4b?logo=playwright&logoColor=white) | Test automation      |
+| ![Allure](https://img.shields.io/badge/Allure-FF6347?logo=qameta&logoColor=white)             | Test reporting       |
+| ![Faker.js](https://img.shields.io/badge/Faker.js-FFC107?logo=javascript&logoColor=black)     | Test data generation |
+| ![Luxon](https://img.shields.io/badge/Luxon-4B0082?logo=javascript&logoColor=white)           | Date/time handling   |
+| ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?logo=prettier&logoColor=black)       | Code formatting      |
+| ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=white)             | Code linting         |
 
 ---
 
@@ -183,6 +192,7 @@ test('example test', async ({ page }) => {
   await expect(page).toHaveTitle(/Example/);
 });
 ```
+
 </details>
 
 <details>
@@ -206,6 +216,7 @@ export class LoginPage {
   }
 }
 ```
+
 </details>
 
 ## 📫 Contact

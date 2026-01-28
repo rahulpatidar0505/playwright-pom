@@ -24,7 +24,6 @@ function getFormattedDate(daysFromNow = 0, format = 'yyyy-MM-dd') {
   return DateTime.now().plus({ days: daysFromNow }).toFormat(format);
 }
 
-
 /**
  * Generate random user data for testing
  * @returns {Object} User data object
@@ -48,9 +47,4 @@ async function wait(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export {
-  readJsonFile,
-  getFormattedDate,
-  generateUser,
-  wait,
-};
+export { readJsonFile, getFormattedDate, generateUser, wait };

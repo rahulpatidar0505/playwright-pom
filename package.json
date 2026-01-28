@@ -6,6 +6,8 @@
   "scripts": {
     "test": "npx playwright test --headed",
     "test:headless": "npx playwright test",
+    "test:ui": "npx playwright test tests/UI",
+    "test:api": "npx playwright test tests/API",
     "test:qa": "set ENV=qa&& npx playwright test --headed",
     "test:prod": "set ENV=prod&& npx playwright test --headed",
     "test:repeat": "npx playwright test --repeat-each=10",

@@ -2,11 +2,12 @@ import { test, expect } from '@playwright/test';
 import env from '../../src/config/index.js';
 import bookingDetails from '../../src/testData/booking-details.json' with { type: 'json' };
 import { BookingDataGenerator } from '../../src/testData/BookingDataGenerator.js';
+import { Endpoint } from '../../src/constants/Endpoint.js';
 
 let token = '';
 
 test.beforeAll('Create authentication token', async ({ request }) => {
-  const response = await request.post(`${env.apiBaseUrl}/auth`, {
+  const response = await request.post(`${env.apiBaseUrl}${Endpoint.AUTH}`, {
     data: {
       username: env.apiCredentials.username,
       password: env.apiCredentials.password,
@@ -16,7 +17,6 @@ test.beforeAll('Create authentication token', async ({ request }) => {
   const responseBody = await response.json();
   expect(responseBody).toHaveProperty('token');
   token = responseBody.token;
-  console.log(`Generated token: ${token}`);
 });
 
 test('should be able to create a booking', async ({ request }) => {
@@ -29,22 +29,31 @@ test('should be able to create a booking', async ({ request }) => {
     additionalneeds: 'Breakfast',
   });
 
-  const response = await request.post(`${env.apiBaseUrl}/booking`, {
+  const response = await request.post(`${env.apiBaseUrl}${Endpoint.BOOKING}`, {
     data: requestBody,
   });
   expect(response.ok()).toBeTruthy();
   expect(response.status()).toBe(200);
   const responseBody = await response.json();
-  expect(responseBody.booking).toHaveProperty('firstname', requestBody.firstname);
+  expect(responseBody.booking).toHaveProperty(
+    'firstname',
+    requestBody.firstname
+  );
   expect(responseBody.booking).toHaveProperty('lastname', requestBody.lastname);
-  expect(responseBody.booking).toHaveProperty('totalprice', requestBody.totalprice);
-  expect(responseBody.booking).toHaveProperty('depositpaid', requestBody.depositpaid);
+  expect(responseBody.booking).toHaveProperty(
+    'totalprice',
+    requestBody.totalprice
+  );
+  expect(responseBody.booking).toHaveProperty(
+    'depositpaid',
+    requestBody.depositpaid
+  );
 });
 
 test('should be able to create a booking with dynamic data', async ({
   request,
 }) => {
-  const response = await request.post(`${env.apiBaseUrl}/booking`, {
+  const response = await request.post(`${env.apiBaseUrl}${Endpoint.BOOKING}`, {
     data: bookingDetails,
   });
   expect(response.ok()).toBeTruthy();
@@ -73,23 +82,26 @@ test('should be able to create a booking with faker data', async ({
 }) => {
   const requestBody = BookingDataGenerator.getRequestBody();
 
-  const response = await request.post(`${env.apiBaseUrl}/booking`, {
+  const response = await request.post(`${env.apiBaseUrl}${Endpoint.BOOKING}`, {
     data: requestBody,
   });
   expect(response.ok()).toBeTruthy();
   expect(response.status()).toBe(200);
   const responseBody = await response.json();
-  expect(responseBody.booking).toHaveProperty('firstname', requestBody.firstname);
+  expect(responseBody.booking).toHaveProperty(
+    'firstname',
+    requestBody.firstname
+  );
   expect(responseBody.booking).toHaveProperty('lastname', requestBody.lastname);
 });
 
 test.describe.serial('CRUD operations on a booking', () => {
   let bookingId;
+  let createdBookingData;
 
   test('CREATE - should be able to create a new booking', async ({
     request,
   }) => {
-
     // // you can pass full body
     // const requestBody = BookingDataGenerator.getRequestBody({
     //   firstname: 'John',
@@ -100,7 +112,6 @@ test.describe.serial('CRUD operations on a booking', () => {
     //   additionalneeds: 'Lunch',
     // });
 
-    
     // // or you can pass partial data to override only specific fields
     // const requestBody = BookingDataGenerator.getRequestBody({
     //   firstname: 'Rahul',
@@ -109,30 +120,33 @@ test.describe.serial('CRUD operations on a booking', () => {
 
     // or you can generate fully random data
     const requestBody = BookingDataGenerator.getRequestBody();
+    createdBookingData = requestBody;
 
-
-    const createResponse = await request.post(`${env.apiBaseUrl}/booking`, {
-      data: requestBody,
-    });
+    const createResponse = await request.post(
+      `${env.apiBaseUrl}${Endpoint.BOOKING}`,
+      {
+        data: requestBody,
+      }
+    );
     expect(createResponse.ok()).toBeTruthy();
     expect(createResponse.status()).toBe(200);
     const createBody = await createResponse.json();
     bookingId = createBody.bookingid;
     expect(bookingId).toBeDefined();
-    console.log(`Created booking with ID: ${bookingId}`);
   });
 
   test('READ - should be able to get the created booking', async ({
     request,
   }) => {
     const getResponse = await request.get(
-      `${env.apiBaseUrl}/booking/${bookingId}`
+      `${env.apiBaseUrl}${Endpoint.BOOKING}/${bookingId}`
     );
     expect(getResponse.ok()).toBeTruthy();
     expect(getResponse.status()).toBe(200);
     const getBody = await getResponse.json();
-    expect(getBody).toHaveProperty('firstname', 'John');
-    expect(getBody).toHaveProperty('lastname', 'Doe');
+
+    // Assert against the actual created data
+    expect(getBody).toMatchObject(createdBookingData);
   });
 
   test('UPDATE - should be able to update the booking', async ({ request }) => {
@@ -147,7 +161,7 @@ test.describe.serial('CRUD operations on a booking', () => {
     });
 
     const updateResponse = await request.put(
-      `${env.apiBaseUrl}/booking/${bookingId}`,
+      `${env.apiBaseUrl}${Endpoint.BOOKING}/${bookingId}`,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -159,18 +173,14 @@ test.describe.serial('CRUD operations on a booking', () => {
     expect(updateResponse.ok()).toBeTruthy();
     expect(updateResponse.status()).toBe(200);
     const updateBody = await updateResponse.json();
-    expect(updateBody).toHaveProperty('firstname', requestBody.firstname);
-    expect(updateBody).toHaveProperty('lastname', requestBody.lastname);
-    expect(updateBody).toHaveProperty('totalprice', requestBody.totalprice);
-    expect(updateBody).toHaveProperty('depositpaid', requestBody.depositpaid);
-    expect(updateBody.bookingdates).toHaveProperty('checkin', requestBody.bookingdates.checkin);
-    expect(updateBody.bookingdates).toHaveProperty('checkout', requestBody.bookingdates.checkout);
-    expect(updateBody).toHaveProperty('additionalneeds', requestBody.additionalneeds);
+
+    // Assert entire response body matches the request
+    expect(updateBody).toMatchObject(requestBody);
   });
 
   test('DELETE - should be able to delete the booking', async ({ request }) => {
     const deleteResponse = await request.delete(
-      `${env.apiBaseUrl}/booking/${bookingId}`,
+      `${env.apiBaseUrl}${Endpoint.BOOKING}/${bookingId}`,
       {
         headers: {
           Cookie: `token=${token}`,
@@ -184,7 +194,7 @@ test.describe.serial('CRUD operations on a booking', () => {
     request,
   }) => {
     const verifyResponse = await request.get(
-      `${env.apiBaseUrl}/booking/${bookingId}`
+      `${env.apiBaseUrl}${Endpoint.BOOKING}/${bookingId}`
     );
     expect(verifyResponse.status()).toBe(404);
   });
