@@ -4,7 +4,6 @@ import { DateTime } from 'luxon';
 import env from '../../src/config/index.js';
 import bookingDetails from '../../src/testData/booking-details.json' with { type: 'json' };
 
-// eslint-disable-next-line no-unused-vars
 let token = '';
 
 test.beforeEach('Create authentication token', async ({ request }) => {
@@ -131,7 +130,9 @@ test.describe.serial('CRUD operations on a booking', () => {
   test('READ - should be able to get the created booking', async ({
     request,
   }) => {
-    const getResponse = await request.get(`${env.apiBaseUrl}/booking/${bookingId}`);
+    const getResponse = await request.get(
+      `${env.apiBaseUrl}/booking/${bookingId}`
+    );
     expect(getResponse.ok()).toBeTruthy();
     expect(getResponse.status()).toBe(200);
     const getBody = await getResponse.json();

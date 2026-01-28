@@ -10,11 +10,11 @@
         },
         {
           "name": "authSession",
-          "value": "{\"id\":\"admin\",\"username\":\"admin\",\"role\":\"admin\",\"name\":\"Admin User\",\"permissions\":[\"read\",\"write\",\"delete\",\"manage-users\"],\"loginTime\":\"2026-01-23T08:15:40.531Z\",\"expiresAt\":\"2026-01-24T08:15:40.531Z\"}"
+          "value": "{\"id\":\"admin\",\"username\":\"admin\",\"role\":\"admin\",\"name\":\"Admin User\",\"permissions\":[\"read\",\"write\",\"delete\",\"manage-users\"],\"loginTime\":\"2026-01-28T11:30:19.073Z\",\"expiresAt\":\"2026-01-29T11:30:19.073Z\"}"
         },
         {
           "name": "userPreferences",
-          "value": "{\"theme\":\"default\",\"language\":\"en\",\"timezone\":\"Asia/Calcutta\",\"lastLogin\":\"2026-01-23T08:15:40.541Z\"}"
+          "value": "{\"theme\":\"default\",\"language\":\"en\",\"timezone\":\"Asia/Calcutta\",\"lastLogin\":\"2026-01-28T11:30:19.084Z\"}"
         }
       ]
     }
