@@ -5,7 +5,7 @@ import { BookingDataGenerator } from '../../src/testData/BookingDataGenerator.js
 
 let token = '';
 
-test.beforeEach('Create authentication token', async ({ request }) => {
+test.beforeAll('Create authentication token', async ({ request }) => {
   const response = await request.post(`${env.apiBaseUrl}/auth`, {
     data: {
       username: env.apiCredentials.username,
@@ -16,6 +16,7 @@ test.beforeEach('Create authentication token', async ({ request }) => {
   const responseBody = await response.json();
   expect(responseBody).toHaveProperty('token');
   token = responseBody.token;
+  console.log(`Generated token: ${token}`);
 });
 
 test('should be able to create a booking', async ({ request }) => {
