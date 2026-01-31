@@ -10,13 +10,13 @@ test.beforeEach('Navigate and verify the title', async ({ page }) => {
   await navigationPage.goToModals();
 });
 
-test('Handle Dialogue', async ({ page }) => {
+test('@smoke Handle Dialogue', async ({ page }) => {
   const modalsPage = new ModalsPage(page);
   await modalsPage.openDialog();
   await modalsPage.confirmDialog();
 });
 
-test('Handle Window', async ({ page }) => {
+test('@regression Handle Window', async ({ page }) => {
   const modalsPage = new ModalsPage(page);
   await modalsPage.fillWindowForm({
     inputText: 'testing123',
@@ -24,7 +24,7 @@ test('Handle Window', async ({ page }) => {
   });
 });
 
-test('Handle Popover', async ({ page }) => {
+test('@regression Handle Popover', async ({ page }) => {
   const modalsPage = new ModalsPage(page);
   await modalsPage.togglePopover();
 
@@ -35,7 +35,12 @@ test('Handle Popover', async ({ page }) => {
   await modalsPage.closePopover();
 });
 
-test('Handle Toastr Notifications', async ({ page }) => {
+test('Handle Toastr Notifications',{
+    annotation: [
+      { type: 'issue', description: 'https://zenetratechnologies.com/practice-app/issues/23180' },
+      { type: 'performance', description: 'very slow test!' },
+    ],
+  }, async ({ page }) => {
   const modalsPage = new ModalsPage(page);
   await modalsPage.showSuccessToastr();
   await expect(modalsPage.successToastrMessage).toBeVisible();
@@ -63,7 +68,7 @@ test('Simple Alert', async ({ page }) => {
   await modalsPage.clickSimpleAlert();
 });
 
-test('Confirm Alert', async ({ page }) => {
+test.only('Confirm Alert', async ({ page }) => {
   const modalsPage = new ModalsPage(page);
   page.on('dialog', async dialog => {
     // eslint-disable-next-line no-console

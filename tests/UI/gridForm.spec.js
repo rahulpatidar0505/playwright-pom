@@ -13,7 +13,7 @@ test.beforeEach('Navigate and verify the title', async ({ page }) => {
 });
 
 test.describe('Form Grid Tests', () => {
-  test('Verify successful form submission with all valid data', async ({
+  test('@smoke Verify successful form submission with all valid data', async ({
     page,
   }) => {
     const gridFormPage = new GridFormPage(page);

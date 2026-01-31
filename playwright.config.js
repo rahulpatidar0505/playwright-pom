@@ -19,9 +19,9 @@ export default defineConfig({
   ],
   use: {
     baseURL: env.baseUrl,
-    trace: 'off',
-    screenshot: 'off',
-    video: 'off',
+    trace: 'on',
+    screenshot: 'on',
+    video: 'on',
     viewport: null,
     ignoreHTTPSErrors: true,
     actionTimeout: 10000,
@@ -41,10 +41,10 @@ export default defineConfig({
       },
     },
 
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
 
     // {
     //   name: 'webkit',
