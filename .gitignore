@@ -1,4 +1,8 @@
 
+# Environment variables (contains sensitive encryption keys)
+.env
+src/config/.env
+
 # Playwright
 node_modules/
 /reports/

@@ -68,7 +68,7 @@ test('Simple Alert', async ({ page }) => {
   await modalsPage.clickSimpleAlert();
 });
 
-test.only('Confirm Alert', async ({ page }) => {
+test('Confirm Alert', async ({ page }) => {
   const modalsPage = new ModalsPage(page);
   page.on('dialog', async dialog => {
     // eslint-disable-next-line no-console
